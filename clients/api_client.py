@@ -7,19 +7,19 @@ from httpx._types import RequestData, RequestFiles
 class APIClient:
     def __init__(self, client: Client):
         """
-        Базовый API клиент, принимающий объект httpx.Client.
+        Base API client. Uses httpx.Client.
 
-        :param client: экземпляр httpx.Client для выполнения HTTP-запросов
+        :param client: instance of httpx.Client
         """
         self.client = client
 
     def get(self, url: URL | str, params: QueryParams | None = None) -> Response:
         """
-        Выполняет GET-запрос.
+        Makes GET-request.
         
-        :param url: URL-адрес эндпоинта.
-        :param params: GET-параметры запроса (например, ?key=value).
-        :return: Объект Response с данными ответа.
+        :param url: endpoint URL.
+        :param params: request query parameters (e.g. ?key=value).
+        :return: httpx.Response object.
         """
         return self.client.get(url, params=params)
     
@@ -31,32 +31,32 @@ class APIClient:
             files: RequestFiles | None = None
     ) -> Response:
         """
-        Выполняет POST-запрос.
+        Makes POST-request.
         
-        :param url: URL-адрес эндпоинта.
-        :param json: Данные в формате JSON.
-        :param data: Форматированные данные формы (например, application/x-www-form-urlencoded).
-        :param files: Файлы для загрузки на сервер.
-        :return: Объект Response с данными ответа.
+        :param url: endpoint URL.
+        :param json: data in JSON format.
+        :param data: Formatted form data (e.g. application/x-www-form-urlencoded).
+        :param files: Files to be uploaded to server.
+        :return: httpx.Response object.
         """
         return self.client.post(url, json=json, data=data, files=files)
     
     def patch(self, url: URL | str, json: Any | None = None) -> Response:
         """
-        Выполняет PATCH-запрос (частичное обновление данных).
+        Makes PATCH-request.
 
-        :param url: URL-адрес эндпоинта.
-        :param json: Данные для обновления в формате JSON.
-        :return: Объект Response с данными ответа.
+        :param url: endpoint URL.
+        :param json: data in JSON format.
+        :return: Оhttpx.Response object.
         """
         return self.client.patch(url, json=json)
 
     def delete(self, url: URL | str) -> Response:
         """
-        Выполняет DELETE-запрос (удаление данных).
+        Makes DELETE-request.
 
-        :param url: URL-адрес эндпоинта.
-        :return: Объект Response с данными ответа.
+        :param url: endpoint URL.
+        :return: httpx.Response object.
         """
         return self.client.delete(url)
     
